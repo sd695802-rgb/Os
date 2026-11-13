@@ -1,0 +1,38 @@
+
+name: Build Welcome Dylib
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Theos
+        uses: Randomblock1/theos-action@v1
+
+      - name: Build Dylib
+        run: |
+          make clean
+          make
+
+      - name: Prepare Output
+        run: |
+          mkdir -p output
+          find . -name "Welcome.dylib" \
+            -not -path "./theos/*" \
+            -exec cp {} output/ \;
+          test -f output/Welcome.dylib
+
+      - name: Upload Dylib
+        uses: actions/upload-artifact@v4
+        with:
+          name: Welcome-Dylib
+          path: output/Welcome.dylib
