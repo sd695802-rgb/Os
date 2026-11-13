@@ -4,7 +4,7 @@
 static UIWindow *welcomeWindow;
 static BOOL welcomeShown = NO;
 
-#define IMAGE_URL @"https://raw.githubusercontent.com/USERNAME/REPO/main/welcome.jpg"
+#define IMAGE_URL @"https://raw.githubusercontent.com/sd695802-rgb/Os/main/IMG_2608.jpeg"
 
 @interface WelcomeController : UIViewController
 @end
